@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 
+import dto.JoinDto;
 import dto.UserDto;
 
 public class UDao {
@@ -26,30 +28,39 @@ public class UDao {
 	}
 	
 	
-	public int join(UserDto dto) {
+	public int join(JoinDto dto) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		int rn = 0;
 		
 		try {
 			
 			conn = DriverManager.getConnection(url, "scott", "tiger");
 			System.out.println("DB conn success!");
 			
-			String query = "insert into users (id, nickname, pw)";
+			String query = "insert into users (id, nickname, pw) values (?, ?, ?)";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getNickname());
+			pstmt.setString(3, dto.getPw());
 			
+			rn = pstmt.executeUpdate();
 			
-		} catch(Exception e1) {
+		}catch(SQLIntegrityConstraintViolationException e) { 
+			rn = 0;
+		}catch(Exception e1) {
 			System.out.println("errer in join() - e1 : ");
 			e1.printStackTrace();
 		} finally {
 			try {
-				
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
 			} catch(Exception e2) { System.out.println("errer in join() - e2 : "); e2.printStackTrace(); }
 		}
 		
-		return 1;
-	}
+		return rn;
+	}// join()
 	
 	public int login(String id) { 
 		
@@ -65,7 +76,9 @@ public class UDao {
 			e1.printStackTrace();
 		} finally {
 			try {
-				
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
 			} catch(Exception e2) { System.out.println("errer in userInfo() - e2 : "); e2.printStackTrace(); }
 		}
 		
@@ -109,7 +122,9 @@ public class UDao {
 			e1.printStackTrace();
 		} finally {
 			try {
-				
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
 			} catch(Exception e2) { System.out.println("errer in userInfo() - e2 : "); e2.printStackTrace(); }
 		}
 		

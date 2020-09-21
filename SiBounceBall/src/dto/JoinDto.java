@@ -6,9 +6,9 @@ public class JoinDto {
 	String nickname;
 	String pw;
 	
-	JoinDto() {}
+	public JoinDto() {}
 	
-	JoinDto(String id, String nickname, String pw){
+	public JoinDto(String id, String nickname, String pw){
 		this.id = id;
 		this.nickname = nickname;
 		this.pw = pw;

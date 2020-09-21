@@ -23,6 +23,7 @@ import javax.swing.JFrame;
 import Objects.*;
 import Scenes.*;
 import dao.UDao;
+import dto.JoinDto;
 import dto.UserDto;
 
 public class SBBMain
@@ -80,11 +81,14 @@ public class SBBMain
 	    Scanner sc = new Scanner(System.in);
 	    System.out.print("id : ");
 	    String id = sc.nextLine();
-	    
+	    System.out.print("nickname : ");
+	    String nickname = sc.nextLine();
+	    System.out.print("pw : ");
+	    String pw = sc.nextLine();
 	    UDao dao = new UDao();
-	    UserDto dto = null;
-	    dto = dao.userInfo(id);
-	    System.out.println(dto.getId());
+	    JoinDto dto = new JoinDto(id, nickname, pw);
+	    int rn = dao.join(dto);
+	    System.out.println("rn : " + rn);
 	  
     // Initialize some things.
     initializeJFrame();
