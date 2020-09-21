@@ -145,14 +145,20 @@ public class UDao {
 		return dto;
 	}
 	
-	public UserDto updateUserLevelInfo(String id) { 
+	public void updateUserLevelInfo(String id, String level) { 
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try {
 			
+			conn =  DriverManager.getConnection(url, "scott", "tiger");
+			String query = "update users set " + level + " = 1 where id = ?";
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, id);
+			
+			int rn = pstmt.executeUpdate();
 			
 		} catch(Exception e1) {
 			System.out.println("errer in userInfo() - e1 : ");
@@ -163,6 +169,6 @@ public class UDao {
 			} catch(Exception e2) { System.out.println("errer in userInfo() - e1 : "); e2.printStackTrace(); }
 		}
 		
-		return null; }
+	}
 	
 }

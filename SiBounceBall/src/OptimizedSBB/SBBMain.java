@@ -79,16 +79,10 @@ public class SBBMain
   public static void main(String[] args)
   {
 	//DB test
-	    Scanner sc = new Scanner(System.in);
-	    System.out.print("id : ");
-	    String id = sc.nextLine();;
-	    System.out.print("pw : ");
-	    String pw = sc.nextLine();
-	    UDao dao = new UDao();
-	    LoginDto dto = new LoginDto(id, pw);
-	    int rn = dao.login(dto);
-	    System.out.println("rn : " + rn);
-	  
+	UDao dao = new UDao();
+	dao.updateUserLevelInfo("wj", "L1");
+	System.out.println("update complete!");
+	
     // Initialize some things.
     initializeJFrame();
     new MakeUI1();
