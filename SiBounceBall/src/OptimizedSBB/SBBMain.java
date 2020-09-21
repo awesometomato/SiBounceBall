@@ -14,6 +14,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,11 @@ import javax.swing.JFrame;
 
 import Objects.*;
 import Scenes.*;
+import dao.UDao;
+import dto.JoinDto;
+import dto.LoginDto;
+import dto.UserDto;
+import service.UserService;
 
 public class SBBMain
 {
@@ -73,6 +79,10 @@ public class SBBMain
 
   public static void main(String[] args)
   {
+	//DB test
+	UserService userService = new UserService();
+	System.out.println(userService.isClearedLevel("wj", 1));
+	
     // Initialize some things.
     initializeJFrame();
     new MakeUI1();
@@ -80,6 +90,8 @@ public class SBBMain
     moveEngine.start();
     makeMainScene.start();
     runAnimation();
+    
+    
     
   }
 
