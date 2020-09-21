@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 import dto.JoinDto;
+import dto.LoginDto;
 import dto.UserDto;
 
 public class UDao {
@@ -62,15 +63,27 @@ public class UDao {
 		return rn;
 	}// join()
 	
-	public int login(String id) { 
+	public int login(LoginDto dto) { 
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		int rn = 0;
 		
 		try {
 			
+			conn = DriverManager.getConnection(url, "scott", "tiger");
+			System.out.println("DB conn success!");
 			
+			String query = "select pw from users where id = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, dto.getId());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(dto.getPw().equals(rs.getString("pw"))) rn = 1;
+				else rn = 0;
+			} else rn = -1;
 		} catch(Exception e1) {
 			System.out.println("errer in userInfo() - e1 : ");
 			e1.printStackTrace();
@@ -82,7 +95,8 @@ public class UDao {
 			} catch(Exception e2) { System.out.println("errer in userInfo() - e2 : "); e2.printStackTrace(); }
 		}
 		
-		return 1;}
+		return rn;
+	} // login()
 	
 	public UserDto userInfo(String uId) {
 		
