@@ -80,14 +80,11 @@ public class SBBMain
 	//DB test
 	    Scanner sc = new Scanner(System.in);
 	    System.out.print("id : ");
-	    String id = sc.nextLine();
-	    System.out.print("nickname : ");
-	    String nickname = sc.nextLine();
+	    String id = sc.nextLine();;
 	    System.out.print("pw : ");
 	    String pw = sc.nextLine();
 	    UDao dao = new UDao();
-	    JoinDto dto = new JoinDto(id, nickname, pw);
-	    int rn = dao.join(dto);
+	    int rn = dao.login(id, pw);
 	    System.out.println("rn : " + rn);
 	  
     // Initialize some things.
