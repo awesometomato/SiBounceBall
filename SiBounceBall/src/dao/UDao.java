@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 import dto.JoinDto;
+import dto.LoginDto;
 import dto.UserDto;
 
 public class UDao {
@@ -62,7 +63,7 @@ public class UDao {
 		return rn;
 	}// join()
 	
-	public int login(String id, String pw) { 
+	public int login(LoginDto dto) { 
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -76,11 +77,11 @@ public class UDao {
 			
 			String query = "select pw from users where id = ?";
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);
+			pstmt.setString(1, dto.getId());
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				if(pw.equals(rs.getString("pw"))) rn = 1;
+				if(dto.getPw().equals(rs.getString("pw"))) rn = 1;
 				else rn = 0;
 			} else rn = -1;
 		} catch(Exception e1) {

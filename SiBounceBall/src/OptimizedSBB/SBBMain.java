@@ -24,6 +24,7 @@ import Objects.*;
 import Scenes.*;
 import dao.UDao;
 import dto.JoinDto;
+import dto.LoginDto;
 import dto.UserDto;
 
 public class SBBMain
@@ -84,7 +85,8 @@ public class SBBMain
 	    System.out.print("pw : ");
 	    String pw = sc.nextLine();
 	    UDao dao = new UDao();
-	    int rn = dao.login(id, pw);
+	    LoginDto dto = new LoginDto(id, pw);
+	    int rn = dao.login(dto);
 	    System.out.println("rn : " + rn);
 	  
     // Initialize some things.
