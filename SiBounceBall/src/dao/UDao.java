@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import dto.UDto;
+import dto.UserDto;
 
 public class UDao {
 
@@ -26,7 +26,32 @@ public class UDao {
 	}
 	
 	
-	public int join(UDto dto) {
+	public int join(UserDto dto) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			conn = DriverManager.getConnection(url, "scott", "tiger");
+			System.out.println("DB conn success!");
+			
+			String query = "insert into users (id, nickname, pw)";
+			
+			
+		} catch(Exception e1) {
+			System.out.println("errer in join() - e1 : ");
+			e1.printStackTrace();
+		} finally {
+			try {
+				
+			} catch(Exception e2) { System.out.println("errer in join() - e2 : "); e2.printStackTrace(); }
+		}
+		
+		return 1;
+	}
+	
+	public int login(String id) { 
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -41,17 +66,14 @@ public class UDao {
 		} finally {
 			try {
 				
-			} catch(Exception e2) { System.out.println("errer in userInfo() - e1 : "); e2.printStackTrace(); }
+			} catch(Exception e2) { System.out.println("errer in userInfo() - e2 : "); e2.printStackTrace(); }
 		}
 		
-		return 1;
-	}
+		return 1;}
 	
-	public int login(String id) { return 1;}
-	
-	public UDto userInfo(String uId) {
+	public UserDto userInfo(String uId) {
 		
-		UDto dto = null;
+		UserDto dto = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -79,8 +101,29 @@ public class UDao {
 				int L8 = rs.getInt("L8");
 				int L9 = rs.getInt("L9");
 				
-				dto = new UDto(id, nickname, L1, L2, L3, L4, L5, L6, L7, L8, L9);
+				dto = new UserDto(id, nickname, L1, L2, L3, L4, L5, L6, L7, L8, L9);
 			}
+			
+		} catch(Exception e1) {
+			System.out.println("errer in userInfo() - e1 : ");
+			e1.printStackTrace();
+		} finally {
+			try {
+				
+			} catch(Exception e2) { System.out.println("errer in userInfo() - e2 : "); e2.printStackTrace(); }
+		}
+		
+		return dto;
+	}
+	
+	public UserDto updateUserLevelInfo(String id) { 
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
 			
 		} catch(Exception e1) {
 			System.out.println("errer in userInfo() - e1 : ");
@@ -91,9 +134,6 @@ public class UDao {
 			} catch(Exception e2) { System.out.println("errer in userInfo() - e1 : "); e2.printStackTrace(); }
 		}
 		
-		return dto;
-	}
-	
-	public UDto updateUserLevelInfo(String id) { return null; }
+		return null; }
 	
 }

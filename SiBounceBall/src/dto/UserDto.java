@@ -1,6 +1,6 @@
 package dto;
 
-public class UDto {
+public class UserDto {
 
 	String id; //pk
 	String nickname;
@@ -14,9 +14,9 @@ public class UDto {
 	int L8;
 	int L9;
 	
-	public UDto() {}
+	public UserDto() {}
 	
-	public UDto(String id, String nickname, int L1, int L2, int L3, int L4, int L5, int L6, int L7, int L8, int L9) {
+	public UserDto(String id, String nickname, int L1, int L2, int L3, int L4, int L5, int L6, int L7, int L8, int L9) {
 		this.id = id;
 		this.nickname = nickname;
 		this.L1 = L1;

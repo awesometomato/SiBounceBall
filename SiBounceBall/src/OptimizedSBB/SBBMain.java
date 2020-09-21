@@ -23,7 +23,7 @@ import javax.swing.JFrame;
 import Objects.*;
 import Scenes.*;
 import dao.UDao;
-import dto.UDto;
+import dto.UserDto;
 
 public class SBBMain
 {
@@ -82,7 +82,7 @@ public class SBBMain
 	    String id = sc.nextLine();
 	    
 	    UDao dao = new UDao();
-	    UDto dto = null;
+	    UserDto dto = null;
 	    dto = dao.userInfo(id);
 	    System.out.println(dto.getId());
 	  
