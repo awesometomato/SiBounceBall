@@ -26,6 +26,7 @@ import dao.UDao;
 import dto.JoinDto;
 import dto.LoginDto;
 import dto.UserDto;
+import service.UserService;
 
 public class SBBMain
 {
@@ -79,9 +80,8 @@ public class SBBMain
   public static void main(String[] args)
   {
 	//DB test
-	UDao dao = new UDao();
-	dao.updateUserLevelInfo("wj", "L1");
-	System.out.println("update complete!");
+	UserService userService = new UserService();
+	System.out.println(userService.isClearedLevel("wj", 1));
 	
     // Initialize some things.
     initializeJFrame();

@@ -171,4 +171,41 @@ public class UDao {
 		
 	}
 	
+	
+	public int isClearedLevel(String id, String level) {
+		UserDto dto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int L = 0;
+		
+		try {
+			
+			conn = DriverManager.getConnection(url, "scott", "tiger");
+			System.out.println("DB conn success!");
+			
+			String query = "select "+ level +" from users where id = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				L = rs.getInt(level);
+				
+			}
+			
+		} catch(Exception e1) {
+			System.out.println("errer in userInfo() - e1 : ");
+			e1.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch(Exception e2) { System.out.println("errer in userInfo() - e2 : "); e2.printStackTrace(); }
+		}
+		
+		return L;
+	}
 }
