@@ -2,7 +2,7 @@ package dto;
 
 public class UDto {
 
-	String id;
+	String id; //pk
 	String nickname;
 	int L1;
 	int L2;

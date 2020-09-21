@@ -14,6 +14,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,8 @@ import javax.swing.JFrame;
 
 import Objects.*;
 import Scenes.*;
+import dao.UDao;
+import dto.UDto;
 
 public class SBBMain
 {
@@ -73,6 +76,16 @@ public class SBBMain
 
   public static void main(String[] args)
   {
+	//DB test
+	    Scanner sc = new Scanner(System.in);
+	    System.out.print("id : ");
+	    String id = sc.nextLine();
+	    
+	    UDao dao = new UDao();
+	    UDto dto = null;
+	    dto = dao.userInfo(id);
+	    System.out.println(dto.getId());
+	  
     // Initialize some things.
     initializeJFrame();
     new MakeUI1();
@@ -80,6 +93,8 @@ public class SBBMain
     moveEngine.start();
     makeMainScene.start();
     runAnimation();
+    
+    
     
   }
 
